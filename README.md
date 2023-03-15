@@ -1,4 +1,4 @@
-#IoT Communication Protocols: CoAP, MQTT, WAMP, and WoT
+IoT Communication Protocols: CoAP, MQTT, WAMP, and WoT
 This repository covers the fundamentals of four popular Internet of Things (IoT) communication protocols: CoAP, MQTT, WAMP, and WoT. Each protocol has its unique features and use cases, making it suitable for specific applications in the IoT ecosystem.
 
 Table of Contents
