@@ -1,0 +1,3 @@
+create a smart home system that controls multiple devices, including a smart bulb, a smart thermostat, and a smart door lock. We'll use Flask to implement the server and Flask-RESTful for API design.
+
+pip install Flask Flask-RESTful

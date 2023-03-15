@@ -1,0 +1,4 @@
+install autobahn, crossbar 
+
+pip install autobahn
+docker run -it -p 8880:8880 crossbario/crossbar

@@ -1,0 +1,2 @@
+we will create a simple calculator application using WAMP. This will consist of a server that exposes basic arithmetic operations (addition, subtraction, multiplication, and division) as Remote Procedure Calls (RPCs), and a client that calls these procedures.
+

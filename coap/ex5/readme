@@ -1,0 +1,5 @@
+The TemperatureResource class is an observable resource that simulates a temperature sensor. The server updates the temperature value every 5 seconds, and clients can observe it for real-time updates.
+
+The server now exposes a /temperature resource. When a client sends a GET request to this resource, it receives the current temperature value. If the client adds the "Observe" option to the request, it will receive real-time updates whenever the temperature value changes.
+
+To run this example, start the server by running coap_temperature_server.py and then run the client using coap_temperature_client.py. The client will display the initial temperature value and update it whenever the server sends a new value.
