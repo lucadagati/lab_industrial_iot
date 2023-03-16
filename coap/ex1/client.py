@@ -10,8 +10,15 @@ async def main():  # Define an asynchronous function called main
         # Read a message from the keyboard
         messaggio = input("Inserisci un messaggio da inviare al server: ")
 
+        # Check if the input is a number
+        if messaggio.isdigit():
+            numero = int(messaggio)
+            messaggio_bytes = numero.to_bytes(length=1, byteorder='big')
+        else:
+            messaggio_bytes = messaggio.encode('utf-8')
+
         # Prepare a POST request
-        request = Message(code=Code.POST, payload=messaggio.encode('utf-8'))
+        request = Message(code=Code.POST, payload=messaggio_bytes)
         request.set_request_uri('coap://localhost/input')
 
         # Send the request and wait for the response
