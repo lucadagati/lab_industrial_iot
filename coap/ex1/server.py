@@ -1,34 +1,44 @@
-import asyncio  # Import the asyncio module
-from aiocoap import resource, Context, Message  # Import the resource, Context, and Message classes from the aiocoap module
-from aiocoap.numbers.codes import Code  # Import the Code class from the aiocoap.numbers.codes module
+import asyncio
+import logging
+from aiocoap import resource, Context, Message
+from aiocoap.numbers.codes import Code
 
-class MyResource(resource.Resource):  # Define a class called MyResource that inherits from the Resource class
+# Configure logging level
+logging.basicConfig(level=logging.INFO)
+
+class MyResource(resource.Resource):
     def __init__(self):
         super().__init__()
 
-    async def render_post(self, request):  # Define a method called render_post that handles POST requests
-        # Print the received message
-        print(f'Messaggio ricevuto: {request}\n')
+    async def render_post(self, request):
+        try:
+            payload = request.payload
+            # Log the received message and payload in various formats
+            logging.info(f'Message received: {request}\n')
+            logging.info(f'Payload (bytes): {payload}')
+            logging.info(f'Payload (string): {payload.decode("utf-8")}')
+            logging.info(f'Payload (hexadecimal): {payload.hex()}')
+            logging.info(f'Payload (binary): {"".join(format(byte, "08b") for byte in payload)}\n')
 
-        # Print the payload in various formats
-        payload = request.payload
-        print(f'Payload (bytes): {payload}')
-        print(f'Payload (stringa): {payload.decode("utf-8")}')
-        print(f'Payload (esadecimale): {payload.hex()}')
-        print(f'Payload (binario): {"".join(format(byte, "08b") for byte in payload)}\n')
+            # Create a response message with a CHANGED status code
+            response = Message(code=Code.CHANGED)
+            return response
+        except Exception as e:
+            # Log any errors encountered during request processing
+            logging.error(f"Error processing the request: {e}")
+            return Message(code=Code.INTERNAL_SERVER_ERROR)
 
-        response = Message(code=Code.CHANGED)  # Create a response message with a CHANGED code
-        return response  # Return the response message
-
-async def main():  # Define an asynchronous function called main
-    # Create a resource and add it to the context
+async def main():
+    # Create a CoAP server context and start listening
     root = resource.Site()
     root.add_resource(('input',), MyResource())
 
-    # Create a CoAP server context and start it
     context = await Context.create_server_context(root)
-    print("Server CoAP in ascolto")
-    await asyncio.sleep(3600)  # Keep the server running for one hour
+    logging.info("CoAP server listening")
 
-if __name__ == "__main__":  # Check if the script is being run directly
-    asyncio.run(main())  # Run the main function using the asyncio event loop
+    # Keep the server running for an hour
+    await asyncio.sleep(3600)
+
+if __name__ == "__main__":
+    # Run the main function using asyncio's event loop
+    asyncio.run(main())
