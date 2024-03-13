@@ -31,7 +31,8 @@ The CoAP client sends a GET request to coap://127.0.0.1:5683/hello and prints th
 
 To run the client, execute:
 
-```bash python coap_client.py
+```bash
+python coap_client.py
 ```
 Upon successful execution, the client will display the server's response, demonstrating the interaction between the CoAP client and server.
 
