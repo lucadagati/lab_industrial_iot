@@ -8,7 +8,7 @@ async def main():  # Define an asynchronous function called main
 
     while True:  # Loop forever
         # Read a message from the keyboard
-        messaggio = input("Inserisci un messaggio da inviare al server: ")
+        messaggio = input("Insert a message to send to the server: ")
 
         # Check if the input is a number
         if messaggio.isdigit():
